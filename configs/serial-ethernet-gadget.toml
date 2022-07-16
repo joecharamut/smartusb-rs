@@ -1,0 +1,22 @@
+[general]
+name = "Serial/Ethernet Gadget"
+idVendor = "0x1d6b"  # Linux Foundation
+idProduct = "0x0104" # Multifunction Composite Gadget
+bcdDevice = "0x0100" # v1.0.0
+bcdUSB = "0x0200"    # USB 2.0
+
+[strings]
+serial = "0123456789"
+manufacturer = "Michaelsoft Binbows"
+product = "RPi Zero Gadget (Serial + Ethernet Mode)"
+
+[configs.c1]
+configuration = "Configuration 1"
+MaxPower = "250"
+
+[functions."acm.usb0"]
+config = "c1"
+
+[functions."rndis.usb0"]
+config = "c1"
+

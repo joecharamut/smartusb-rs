@@ -1,0 +1,19 @@
+[package]
+name = "smartusb"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.5.9"
+clap = "3.2.8"
+sh1106 = { version = "0.4.0", features = [ "graphics" ] }
+rppal = { version = "0.13.1", features = ["hal"] }
+embedded-graphics-core = "0.3.2"
+embedded-graphics = "0.7.1"
+daemonize = "0.4.1"
+closure = "0.3.0"
+fps_clock = "2.0"
+
