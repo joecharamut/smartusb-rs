@@ -17,13 +17,13 @@ pub struct Display {
 }
 
 impl Display {
-    pub fn new(flip_screen: bool) -> Result<Display, Box<dyn Error>> {
+    pub fn new(flip: bool) -> Result<Display, Box<dyn Error>> {
         let i2c = I2c::new()?;
         let gpio = Gpio::new()?;
 
         Ok(Display {
             disp: Builder::new()
-                .with_rotation(match flip_screen {
+                .with_rotation(match flip {
                     true => DisplayRotation::Rotate180,
                     false => DisplayRotation::Rotate0,
                 })

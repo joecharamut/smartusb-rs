@@ -18,18 +18,24 @@ pub struct Input {
 }
 
 impl Input {
-    pub fn new() -> Result<Input, Box<dyn Error>> {
+    pub fn new(flip: bool) -> Result<Input, Box<dyn Error>> {
         let gpio = Gpio::new()?;
 
-        let up = gpio.get(6)?.into_input_pullup();
-        let down = gpio.get(19)?.into_input_pullup();
-        let left = gpio.get(5)?.into_input_pullup();
-        let right = gpio.get(26)?.into_input_pullup();
+        let mut up = gpio.get(6)?.into_input_pullup();
+        let mut down = gpio.get(19)?.into_input_pullup();
+        let mut left = gpio.get(5)?.into_input_pullup();
+        let mut right = gpio.get(26)?.into_input_pullup();
         let press = gpio.get(13)?.into_input_pullup();
 
-        let key1 = gpio.get(21)?.into_input_pullup();
+        let mut key1 = gpio.get(21)?.into_input_pullup();
         let key2 = gpio.get(20)?.into_input_pullup();
-        let key3 = gpio.get(16)?.into_input_pullup();
+        let mut key3 = gpio.get(16)?.into_input_pullup();
+
+        if flip {
+            (up, down) = (down, up);
+            (left, right) = (right, left);
+            (key1, key3) = (key3, key1);
+        }
 
         Ok(Input {
             pin_joyup: up,

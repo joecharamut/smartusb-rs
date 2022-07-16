@@ -76,7 +76,7 @@ fn main_loop(conf: &Config) {
     let mut oled = Display::new(conf.flip_screen).expect("Unable to create display");
     oled.init();
 
-    let mut input = Input::new().expect("Unable to initialize input");
+    let mut input = Input::new(conf.flip_buttons).expect("Unable to initialize input");
     input.connect_interrupts(queue_tx).expect("Error connecting input interrupts");
 
     oled.draw_text("  Hello world 1!", 0, 0);
