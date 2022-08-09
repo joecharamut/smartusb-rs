@@ -1,5 +1,5 @@
 use daemonize::Daemonize;
-use clap::{Arg, Command};
+use clap::Parser;
 use fps_clock::FpsClock;
 use glob::glob;
 
@@ -20,28 +20,11 @@ use conf::Config;
 mod gadgetconfig;
 use gadgetconfig::GadgetConfig;
 
+mod args;
+
 fn main() {
-    let args = Command::new("smartusb")
-        .version("0.1.0")
-        .about("Enables the RPi Zero to be a very smart USB device")
-        .arg(Arg::with_name("config")
-                .short('c')
-                .long("config")
-                .takes_value(true)
-                .default_value("/etc/smartusb/config.toml")
-                .help("The path to the main config file"))
-        .arg(Arg::with_name("verbose")
-                .short('v')
-                .long("verbose")
-                .help("More verbose logging"))
-        .arg(Arg::with_name("daemon")
-                .short('d')
-                .long("daemon")
-                .help("Run the smartusb daemon"))
-        .get_matches();
-    
-    let config_path: &str = args.get_one::<String>("config").unwrap();
-    let config: Config = match fs::read_to_string(config_path) {
+    let args = args::Args::parse();
+    let config: Config = match fs::read_to_string(&args.config) {
         Ok(s) => Config::from_str(&s).expect("Error loading config"),
         Err(_) => {
             eprintln!("WARN: Config file does not exist, using defaults.");
@@ -76,7 +59,7 @@ fn main() {
     
     let is_raspi = fs::read_to_string("/proc/device-tree/model").map_or(false, |text| text.contains("Raspberry"));
     
-    if args.is_present("daemon") {
+    if args.daemon {
         if !is_raspi {
             panic!("Refusing to start daemon (Unknown device model)");
         }

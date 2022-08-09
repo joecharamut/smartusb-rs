@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 toml = "0.5.9"
-clap = "3.2.8"
+clap = { version = "3.2.16", features = ["derive"] }
 sh1106 = { version = "0.4.0", features = [ "graphics" ] }
 rppal = { version = "0.13.1", features = ["hal"] }
 embedded-graphics-core = "0.3.2"
