@@ -16,4 +16,5 @@ embedded-graphics = "0.7.1"
 daemonize = "0.4.1"
 closure = "0.3.0"
 fps_clock = "2.0"
-
+mb85rc = { git = "https://github.com/joecharamut/rust-mb85rc.git" }
+glob = "0.3.0"

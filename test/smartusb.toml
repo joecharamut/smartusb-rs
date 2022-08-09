@@ -1,0 +1,14 @@
+# configuration file for smartusb
+
+# ui settings
+flip_screen = true
+flip_buttons = false
+
+# gadget .toml files location
+gadgets_path = "./test/gadgets"
+
+# use fram to store settings
+use_fram = true
+fram_address = "0x50"
+fram_size = "auto"
+

@@ -4,6 +4,7 @@ use serde::{Deserialize, de};
 pub struct Config {
     pub flip_screen: bool,
     pub flip_buttons: bool,
+    pub gadgets_path: String,
 }
 
 impl Config {
@@ -11,6 +12,7 @@ impl Config {
         Config {
             flip_screen: true,
             flip_buttons: false,
+            gadgets_path: ".".into(),
         }
     }
 
